@@ -1,22 +1,19 @@
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT),
+  host: 'smtp.gmail.com',
+  port: 587,
   secure: false,
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
-  },
-  tls: {
-    rejectUnauthorized: false // Only for development
+    user: process.env.EMAIL_USER, // Check this value
+    pass: process.env.EMAIL_PASS, // Check this value
   }
 });
 
 export const sendVerificationEmail = async (email, code) => {
   try {
     const mailOptions = {
-      from: process.env.SMTP_FROM,
+      from: process.env.SMTP_USER,
       to: email,
       subject: 'Email Verification Code',
       html: `
@@ -44,7 +41,7 @@ export const sendVerificationEmail = async (email, code) => {
 export const sendPasswordResetEmail = async (email, code) => {
   try {
     const mailOptions = {
-      from: process.env.SMTP_FROM,
+      from: process.env.SMTP_USER,
       to: email,
       subject: 'Password Reset Code',
       html: `
