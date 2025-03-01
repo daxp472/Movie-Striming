@@ -28,44 +28,47 @@ import AuthLayout from './components/layouts/AuthLayout';
 import UserLayout from './components/layouts/UserLayout';
 import AdminLayout from './components/layouts/AdminLayout';
 
-// Auth Provider
+// Context Providers
 import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Toaster position="top-center" />
-        <Routes>
-          {/* Auth Routes */}
-          <Route element={<AuthLayout />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/activate" element={<ActivationPage />} />
-          </Route>
+    <ThemeProvider>
+      <AuthProvider>
+        <Router>
+          <Toaster position="top-center" />
+          <Routes>
+            {/* Auth Routes */}
+            <Route element={<AuthLayout />}>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/activate" element={<ActivationPage />} />
+            </Route>
 
-          {/* User Routes */}
-          <Route element={<UserLayout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/movie/:id" element={<MovieDetailsPage />} />
-            <Route path="/watch/:id" element={<WatchPage />} />
-            <Route path="/watchlist" element={<WatchlistPage />} />
-            <Route path="/history" element={<HistoryPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/preferences" element={<PreferencesPage />} />
-          </Route>
+            {/* User Routes */}
+            <Route element={<UserLayout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/movie/:id" element={<MovieDetailsPage />} />
+              <Route path="/watch/:id" element={<WatchPage />} />
+              <Route path="/watchlist" element={<WatchlistPage />} />
+              <Route path="/history" element={<HistoryPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/preferences" element={<PreferencesPage />} />
+            </Route>
 
-          {/* Admin Routes */}
-          <Route element={<AdminLayout />}>
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/movies" element={<AdminMoviesPage />} />
-            <Route path="/admin/users" element={<AdminUsersPage />} />
-            <Route path="/admin/movies/add" element={<AdminAddMoviePage />} />
-            <Route path="/admin/movies/edit/:id" element={<AdminEditMoviePage />} />
-          </Route>
-        </Routes>
-      </Router>
-    </AuthProvider>
+            {/* Admin Routes */}
+            {/* <Route element={<AdminLayout />}> */}
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/movies" element={<AdminMoviesPage />} />
+              <Route path="/admin/users" element={<AdminUsersPage />} />
+              <Route path="/admin/movies/add" element={<AdminAddMoviePage />} />
+              <Route path="/admin/movies/edit/:id" element={<AdminEditMoviePage />} />
+            {/* </Route> */}
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 
