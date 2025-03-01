@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useEffect, useState, ReactNode, useContext } from 'react';
 import { authEndpoints } from '@/config/api';
 
 interface User {
@@ -53,3 +53,5 @@ export const useAuth = () => {
   }
   return context;
 };
+
+export { AuthContext };
