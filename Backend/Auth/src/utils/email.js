@@ -1,19 +1,27 @@
 import nodemailer from 'nodemailer';
 
+// Ensure environment variables are loaded (optional if server.js works)
+import dotenv from 'dotenv';
+dotenv.config();
+
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
   secure: false,
   auth: {
-    user: process.env.EMAIL_USER, // Check this value
-    pass: process.env.EMAIL_PASS, // Check this value
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   }
 });
+
+// Debug credentials
+console.log('Email User:', process.env.EMAIL_USER);
+console.log('Email Pass:', process.env.EMAIL_PASS);
 
 export const sendVerificationEmail = async (email, code) => {
   try {
     const mailOptions = {
-      from: process.env.SMTP_USER,
+      from: process.env.EMAIL_USER,
       to: email,
       subject: 'Email Verification Code',
       html: `
@@ -41,7 +49,7 @@ export const sendVerificationEmail = async (email, code) => {
 export const sendPasswordResetEmail = async (email, code) => {
   try {
     const mailOptions = {
-      from: process.env.SMTP_USER,
+      from: process.env.EMAIL_USER,
       to: email,
       subject: 'Password Reset Code',
       html: `

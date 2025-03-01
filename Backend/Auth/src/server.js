@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.js';
 
 // Load environment variables
 dotenv.config();
+dotenv.config({ path: '../.env' });
 
 // Initialize Express app
 const app = express();
