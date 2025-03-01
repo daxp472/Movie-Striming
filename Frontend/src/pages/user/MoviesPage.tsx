@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FiSearch, FiFilter } from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
 import MovieGrid from '@/components/movies/MovieGrid';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -39,16 +39,16 @@ const movies = [
   // Add more movies
 ];
 
-const filteredMovies = movies.filter(
-  (movie) =>
-    (selectedGenre === '' || movie.genre === selectedGenre) &&
-    movie.title.toLowerCase().includes(search.toLowerCase())
-);
-
 export default function MoviesPage() {
   const [search, setSearch] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
   const [sort, setSort] = useState('latest');
+
+  const filteredMovies = movies.filter(
+    (movie) =>
+      (selectedGenre === '' || movie.genre === selectedGenre) &&
+      movie.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="container mx-auto py-8 space-y-6">
