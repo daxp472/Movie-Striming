@@ -134,7 +134,7 @@ JWT_SECRET=xxx
 ## 📡 Common Issues
 
 1. **Port Conflicts**
-   - Check if ports 4000, 5001, or 5002 are in use
+   - Check if ports 4000, 5000, or 5002 are in use
    - Update .env file if needed
 
 2. **MongoDB Connection**
