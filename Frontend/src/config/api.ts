@@ -3,7 +3,7 @@ import axios from 'axios';
 // Base URLs for different services
 const AUTH_BASE_URL = 'http://localhost:4000/api';
 const MOVIE_BASE_URL = 'http://localhost:5000/api';
-const ADMIN_BASE_URL = 'http://localhost:3000/api';
+const ADMIN_BASE_URL = 'http://localhost:5002/api';
 
 // Create axios instances with interceptors
 const createApiInstance = (baseURL: string) => {
