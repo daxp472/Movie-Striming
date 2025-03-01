@@ -8,7 +8,8 @@ const verificationCodeSchema = new mongoose.Schema({
   },
   code: {
     type: String,
-    required: true
+    required: true,
+    unique: true // Ensure each code is unique
   },
   type: {
     type: String,
@@ -27,5 +28,19 @@ const verificationCodeSchema = new mongoose.Schema({
 
 // Index to automatically expire documents
 verificationCodeSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
+
+// Pre-save hook to delete existing codes of the same type for the user
+verificationCodeSchema.pre('save', async function(next) {
+  try {
+    // Delete existing codes of the same type for the user
+    await mongoose.model('VerificationCode').deleteMany({
+      userId: this.userId,
+      type: this.type
+    });
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 export default mongoose.model('VerificationCode', verificationCodeSchema);
