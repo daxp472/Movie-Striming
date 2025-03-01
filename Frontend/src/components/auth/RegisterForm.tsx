@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -13,7 +15,7 @@ const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
-  confirmPassword: z.string()
+  confirmPassword: z.string(),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],
@@ -50,60 +52,91 @@ function RegisterForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        {/* Name Field */}
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
+            <FormItem className="flex flex-col items-center">
+              <FormLabel className="text-sm text-gray-400 mb-2">Name</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your name" {...field} />
+                <Input
+                  placeholder="Enter your name"
+                  {...field}
+                  className="w-full max-w-xs px-4 py-2 bg-white/20 rounded-md border border-gray-300 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+
+        {/* Email Field */}
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
+            <FormItem className="flex flex-col items-center">
+              <FormLabel className="text-sm text-gray-400 mb-2">Email</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your email" {...field} />
+                <Input
+                  placeholder="Enter your email"
+                  {...field}
+                  className="w-full max-w-xs px-4 py-2 bg-white/20 rounded-md border border-gray-300 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+
+        {/* Password Field */}
         <FormField
           control={form.control}
           name="password"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
+            <FormItem className="flex flex-col items-center">
+              <FormLabel className="text-sm text-gray-400 mb-2">Password</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="Create a password" {...field} />
+                <Input
+                  type="password"
+                  placeholder="Create a password"
+                  {...field}
+                  className="w-full max-w-xs px-4 py-2 bg-white/20 rounded-md border border-gray-300 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+
+        {/* Confirm Password Field */}
         <FormField
           control={form.control}
           name="confirmPassword"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Confirm Password</FormLabel>
+            <FormItem className="flex flex-col items-center">
+              <FormLabel className="text-sm text-gray-400 mb-2">Confirm Password</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="Confirm your password" {...field} />
+                <Input
+                  type="password"
+                  placeholder="Confirm your password"
+                  {...field}
+                  className="w-full max-w-xs px-4 py-2 bg-white/20 rounded-md border border-gray-300 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full" disabled={isLoading}>
+
+        {/* Register Button */}
+        <Button
+          type="submit"
+          className="w-full max-w-xs bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors duration-200"
+          disabled={isLoading}
+        >
           {isLoading ? "Creating account..." : "Create Account"}
         </Button>
       </form>

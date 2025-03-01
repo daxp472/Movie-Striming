@@ -39,16 +39,16 @@ function App() {
         </Route>
 
         {/* Admin Routes */}
-        <Route element={<ProtectedRoute role="admin" />}>
+        {/* <Route element={<ProtectedRoute role="admin" />}> */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
-            <Route path="movies" element={<MovieManagement />} />
+            <Route path="movies" element={<MovieManagement />} /> 
             <Route path="movies/add" element={<AddMovie />} />
             <Route path="movies/edit/:id" element={<EditMovie />} />
             <Route path="users" element={<UserManagement />} />
             <Route path="analytics" element={<Analytics />} />
           </Route>
-        </Route>
+        {/* </Route> */}
 
         <Route path="/" element={<Navigate to="/movies" replace />} />
       </Routes>

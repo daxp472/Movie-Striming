@@ -55,34 +55,52 @@ function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        {/* Email Field */}
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
+            <FormItem className="flex flex-col items-center">
+              <FormLabel className="text-sm text-gray-400 mb-2">Email</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your email" {...field} />
+                <Input
+                  placeholder="Enter your email"
+                  {...field}
+                  className="w-full max-w-xs px-4 py-2 bg-white/20 rounded-md border border-gray-300 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+
+        {/* Password Field */}
         <FormField
           control={form.control}
           name="password"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
+            <FormItem className="flex flex-col items-center">
+              <FormLabel className="text-sm text-gray-400 mb-2">Password</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="Enter your password" {...field} />
+                <Input
+                  type="password"
+                  placeholder="Enter your password"
+                  {...field}
+                  className="w-full max-w-xs px-4 py-2 bg-white/20 rounded-md border border-gray-300 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full" disabled={isLoading}>
+
+        {/* Login Button */}
+        <Button
+          type="submit"
+          className="w-full max-w-xs bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors duration-200"
+          disabled={isLoading}
+        >
           {isLoading ? "Logging in..." : "Login"}
         </Button>
       </form>
