@@ -20,23 +20,23 @@ const RegisterPage: React.FC = () => {
       setPasswordError('Passwords do not match');
       return false;
     }
-    
+
     if (password.length < 6) {
       setPasswordError('Password must be at least 6 characters');
       return false;
     }
-    
+
     setPasswordError(null);
     return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validatePassword()) {
       return;
     }
-    
+
     try {
       await register(name, email, password);
       navigate('/');
@@ -46,31 +46,39 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black py-12 px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-md w-full space-y-8 bg-black/30 p-8 rounded-2xl shadow-2xl shadow-black/50 border border-white/20 backdrop-blur-xl">
+        {/* Glassmorphism Card */}
         <div className="text-center">
           <div className="flex justify-center">
-            <Film className="h-12 w-12 text-primary" />
+            <Film className="h-12 w-12 text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]" />
           </div>
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Create your account</h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <h2 className="mt-6 text-4xl font-bold text-white tracking-tight drop-shadow-md">
+            Create your account
+          </h2>
+          <p className="mt-2 text-sm text-gray-300 font-light">
             Or{' '}
-            <Link to="/login" className="font-medium text-primary hover:text-primary/80">
+            <Link
+              to="/login"
+              className="font-medium text-purple-400 hover:text-purple-300 hover:underline transition-colors duration-200"
+            >
               sign in to your existing account
             </Link>
           </p>
         </div>
-        
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
+            <div className="bg-red-500/10 border border-red-500/30 text-red-300 px-4 py-3 rounded-xl text-sm backdrop-blur-sm">
               {error}
             </div>
           )}
-          
-          <div className="space-y-4">
+
+          <div className="space-y-6">
             <div>
-              <Label htmlFor="name">Full Name</Label>
+              <Label htmlFor="name" className="text-gray-200 font-medium">
+                Full Name
+              </Label>
               <Input
                 id="name"
                 name="name"
@@ -79,12 +87,14 @@ const RegisterPage: React.FC = () => {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1"
+                className="mt-2 w-full rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 focus:border-transparent transition-all duration-300"
               />
             </div>
-            
+
             <div>
-              <Label htmlFor="email">Email address</Label>
+              <Label htmlFor="email" className="text-gray-200 font-medium">
+                Email address
+              </Label>
               <Input
                 id="email"
                 name="email"
@@ -93,12 +103,14 @@ const RegisterPage: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1"
+                className="mt-2 w-full rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 focus:border-transparent transition-all duration-300"
               />
             </div>
-            
+
             <div>
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-gray-200 font-medium">
+                Password
+              </Label>
               <Input
                 id="password"
                 name="password"
@@ -107,12 +119,14 @@ const RegisterPage: React.FC = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1"
+                className="mt-2 w-full rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 focus:border-transparent transition-all duration-300"
               />
             </div>
-            
+
             <div>
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <Label htmlFor="confirmPassword" className="text-gray-200 font-medium">
+                Confirm Password
+              </Label>
               <Input
                 id="confirmPassword"
                 name="confirmPassword"
@@ -121,24 +135,31 @@ const RegisterPage: React.FC = () => {
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="mt-1"
+                className="mt-2 w-full rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 focus:border-transparent transition-all duration-300"
               />
               {passwordError && (
-                <p className="text-sm text-red-600 mt-1">{passwordError}</p>
+                <p className="text-sm text-red-400 mt-2 drop-shadow-sm">{passwordError}</p>
               )}
             </div>
           </div>
 
-          <div className="text-sm text-gray-600">
-            <p>By registering, you'll need admin approval before you can stream movies.</p>
+          <div className="text-sm text-gray-300 font-light">
+            <p>By registering, you’ll need admin approval before you can stream movies.</p>
           </div>
 
           <Button
             type="submit"
-            className="w-full"
+            className="w-full rounded-xl bg-purple-600 text-white font-medium py-3 hover:bg-purple-700 hover:shadow-lg hover:shadow-purple-500/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
             disabled={isLoading}
           >
-            {isLoading ? 'Creating account...' : 'Create account'}
+            {isLoading ? (
+              <span className="flex items-center justify-center">
+                <Film className="h-5 w-5 animate-spin mr-2" />
+                Creating account...
+              </span>
+            ) : (
+              'Create account'
+            )}
           </Button>
         </form>
       </div>
