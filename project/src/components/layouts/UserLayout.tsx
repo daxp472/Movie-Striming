@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet, Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Navbar from '../navigation/Navbar';
@@ -7,6 +7,11 @@ import Sidebar from '../navigation/Sidebar';
 const UserLayout: React.FC = () => {
   const { isAuthenticated } = useAuth();
   const location = useLocation();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
   // Redirect to login if not authenticated
   if (!isAuthenticated) {
@@ -15,9 +20,9 @@ const UserLayout: React.FC = () => {
 
   return (
     <div className="flex h-screen bg-black text-white">
-      <Sidebar />
+      <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
       <div className="flex-1 flex flex-col overflow-hidden">
-        <Navbar />
+        <Navbar toggleSidebar={toggleSidebar} />
         <main className="flex-1 overflow-y-auto">
           <div className="relative">
             {/* Gradient background with blur effect */}

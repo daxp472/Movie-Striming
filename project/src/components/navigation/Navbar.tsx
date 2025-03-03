@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Search, Bell, User, Menu, X } from 'lucide-react';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  toggleSidebar: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
   const { user, logout } = useAuth();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -17,18 +21,15 @@ const Navbar: React.FC = () => {
           <div className="flex items-center">
             <div className="flex-shrink-0 md:hidden">
               <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={toggleSidebar}
                 className="text-gray-300 hover:text-white"
               >
-                {isMobileMenuOpen ? (
-                  <X className="h-6 w-6" />
-                ) : (
-                  <Menu className="h-6 w-6" />
-                )}
+                <Menu className="h-6 w-6" />
               </button>
             </div>
-            <Link to="/" className="flex items-center">
-              <span className="text-xl font-bold text-white ml-2 md:ml-0">MovieFlix</span>
+            <Link to="/home" className="flex items-center">
+              <span className="text-xl font-bold text-white ml-2 md:ml-0">Bolt</span>
+              <span className="text-xl font-bold text-purple-500">Movies</span>
             </Link>
           </div>
 
@@ -83,11 +84,11 @@ const Navbar: React.FC = () => {
                     Profile
                   </Link>
                   <Link
-                    to="/preferences"
+                    to="/settings"
                     className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/10"
                     onClick={() => setIsProfileOpen(false)}
                   >
-                    Preferences
+                    Settings
                   </Link>
                   <button
                     onClick={() => {
@@ -126,11 +127,25 @@ const Navbar: React.FC = () => {
         <div className="md:hidden bg-black/80 backdrop-blur-md border-b border-white/10">
           <div className="px-2 pt-2 pb-3 space-y-1">
             <Link
-              to="/"
+              to="/home"
               className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Home
+            </Link>
+            <Link
+              to="/movies"
+              className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Movies
+            </Link>
+            <Link
+              to="/tv-shows"
+              className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              TV Shows
             </Link>
             <Link
               to="/watchlist"
@@ -138,13 +153,6 @@ const Navbar: React.FC = () => {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Watchlist
-            </Link>
-            <Link
-              to="/history"
-              className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              History
             </Link>
           </div>
         </div>
